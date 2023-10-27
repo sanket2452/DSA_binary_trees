@@ -1,0 +1,36 @@
+int kthSmallest(TreeNode<int> *root, int k)
+{
+    stack<TreeNode<int>*> s;
+
+        while(!s.empty() || root != NULL){
+            while(root != NULL){
+                s.push(root);
+                root = root->left;
+            }
+            root = s.top();
+            s.pop();
+            if(--k == 0)
+                break;
+            root = root->right;
+        }
+        return root->data;
+}
+
+-------------------------------------------------------------------------------------------------------------------------
+class Solution {
+public:
+    int kthSmallest(TreeNode* root, int k) {
+        vector<int> ans;
+        search(root, ans);
+        sort(ans.begin(), ans.end());
+
+        int a=ans[k-1];
+        return a;
+    }
+    void search(TreeNode* root, vector<int> &ans){
+        if(root==NULL) return;
+        search(root->left, ans);
+        ans.push_back(root->val);
+        search(root->right, ans);
+    }
+};
