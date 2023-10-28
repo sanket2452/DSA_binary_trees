@@ -1,0 +1,18 @@
+class Solution {
+public:
+
+    bool isSameTree(TreeNode* p, TreeNode* q) {
+        if (p == NULL && q == NULL)
+        return 1;
+ 
+    /* 2. both non-empty -> compare them */
+    if (p != NULL && q != NULL) {
+        return (p->val == q->val
+                && isSameTree(p->left, q->left)
+                && isSameTree(p->right, q->right));
+    }
+ 
+    /* 3. one empty, one not -> false */
+    return 0;
+    }
+};
